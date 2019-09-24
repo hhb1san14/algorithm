@@ -4,7 +4,7 @@
 ### 项目代码仓库
 https://github.com/hhb1san14/lintcode
 
-#### 克隆项目
+### 克隆项目
 git clone https://github.com/hhb1san14/lintcode.git
 
 ### 开发环境
