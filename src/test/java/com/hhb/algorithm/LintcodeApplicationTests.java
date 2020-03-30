@@ -1,4 +1,4 @@
-package com.hhb.lintcode;
+package com.hhb.algorithm;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
