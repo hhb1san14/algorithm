@@ -82,6 +82,7 @@ public class question_0001 {
     }
 
 
+
     public static void main(String[] args) {
         int[] array = {3, 2, 4};
         int[] ints = twoSum2(array, 6);
