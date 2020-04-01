@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * @author: huanghongbo
  * @Date: 2020-03-31 10:29
- * @Description: 两数之和 II - 输入有序数组:https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
+ * @Description: 两数之和II - 输入有序数组:https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/
  * <p>
  * 给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。
  * <p>
