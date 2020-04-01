@@ -102,7 +102,7 @@ public class question_0088 {
     }
 
     /**
-     * todo: bug调试
+     * 时间复杂度O(n)
      *
      * @param nums1
      * @param m
@@ -113,9 +113,10 @@ public class question_0088 {
         int len1 = m - 1;
         int len2 = n - 1;
         int length = m + n - 1;
-        for (int i = length - 1; i > 0; i++) {
-            if (len1 > 0 && len2 > 0) {
+        for (int i = length; i >= 0; i--) {
+            if (len1 >= 0 && len2 >= 0) {
                 nums1[i] = nums1[len1] < nums2[len2] ? nums2[len2--] : nums1[len1--];
+                continue;
             }
             if (len1 >= 0 && len2 < 0) {
                 nums1[i] = nums1[len1--];
