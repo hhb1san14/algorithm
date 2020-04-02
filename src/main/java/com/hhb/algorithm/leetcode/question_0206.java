@@ -3,7 +3,7 @@ package com.hhb.algorithm.leetcode;
 /**
  * @author: huanghongbo
  * @Date: 2020-04-01 16:20
- * @Description:反转链表:https://leetcode-cn.com/problems/reverse-linked-list/ 反转一个单链表。
+ * @Description:反转链表 https://leetcode-cn.com/problems/reverse-linked-list/ 反转一个单链表。
  * <p>
  * 示例:
  * <p>
