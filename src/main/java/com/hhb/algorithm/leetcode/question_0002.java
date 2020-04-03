@@ -1,5 +1,8 @@
 package com.hhb.algorithm.leetcode;
 
+
+import java.math.BigDecimal;
+
 /**
  * @author: huanghongbo
  * @Date: 2020-04-03 15:25
@@ -18,7 +21,58 @@ package com.hhb.algorithm.leetcode;
  * <p>
  */
 public class question_0002 {
+
+
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        return null;
+
+        java.math.BigDecimal result = new java.math.BigDecimal(0);
+        java.math.BigDecimal i = new java.math.BigDecimal(1);
+        while (l1 != null) {
+            BigDecimal bigDecimal = new BigDecimal(l1.val);
+            BigDecimal multiply = i.multiply(bigDecimal);
+            result.add(multiply);
+            l1 = l1.next;
+            i = i.multiply(new java.math.BigDecimal(10));
+        }
+        java.math.BigDecimal j = new java.math.BigDecimal(1);
+        while (l2 != null) {
+            result.add(j.multiply(new java.math.BigDecimal(l2.val)));
+            l2 = l2.next;
+            j = j.multiply(new java.math.BigDecimal(10));
+        }
+        String s = String.valueOf(result);
+        ListNode listNode = new ListNode(0);
+        ListNode temp = listNode;
+        for (int k = s.length() - 1; k >= 0; k--) {
+            String c = String.valueOf(s.charAt(k));
+            temp.next = new ListNode(Integer.valueOf(c));
+            temp = temp.next;
+        }
+        return listNode.next;
+    }
+
+
+    public static void main(String[] args) {
+        ListNode listNode1 = new ListNode(1);
+        ListNode listNode2 = new ListNode(2);
+        ListNode listNode3 = new ListNode(4);
+
+        ListNode listNode4 = new ListNode(1);
+        ListNode listNode5 = new ListNode(3);
+        ListNode listNode6 = new ListNode(4);
+
+        listNode1.next = listNode2;
+        listNode2.next = listNode3;
+
+        listNode4.next = listNode5;
+        listNode5.next = listNode6;
+
+
+        ListNode listNode = addTwoNumbers(listNode1, listNode4);
+        while (listNode != null) {
+            System.err.print(listNode.val + "===>>> ");
+            listNode = listNode.next;
+        }
+
     }
 }
