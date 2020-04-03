@@ -78,6 +78,7 @@ public class question_0021 {
         ListNode listNode = mergeTwoLists(listNode1, listNode4);
         while (listNode != null) {
             System.err.print(listNode.val + "===>>> ");
+            listNode = listNode.next;
         }
     }
 
