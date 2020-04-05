@@ -49,6 +49,21 @@ public class question_0083 {
         return listNode.next;
     }
 
+
+    public static ListNode deleteDuplicates2(ListNode head) {
+        ListNode curr = head;
+        while (curr != null && curr.next != null) {
+            if (curr.val == curr.next.val) {
+                curr.next = curr.next.next;
+            } else {
+                curr = curr.next;
+            }
+        }
+        return head;
+
+    }
+
+
     public static void main(String[] args) {
         ListNode listNode1 = new ListNode(1);
         ListNode listNode2 = new ListNode(2);
@@ -63,7 +78,7 @@ public class question_0083 {
         listNode4.next = listNode5;
 //        listNode5.next = listNode6;
 
-        ListNode listNode = deleteDuplicates(listNode1);
+        ListNode listNode = deleteDuplicates2(listNode1);
         while (listNode != null) {
             System.err.print(listNode.val + "===>>> ");
             listNode = listNode.next;
