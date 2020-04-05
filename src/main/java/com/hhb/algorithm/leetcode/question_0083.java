@@ -19,19 +19,30 @@ package com.hhb.algorithm.leetcode;
 public class question_0083 {
 
 
+    /**
+     * 自己的写法
+     *
+     * @param head
+     * @return
+     */
     public static ListNode deleteDuplicates(ListNode head) {
+        // 创建一个临时节点
         ListNode listNode = new ListNode(-1);
         listNode.next = head;
         if (head == null) {
             return listNode.next;
         }
+        //记录当前节点的下一个节点
         ListNode temp = head.next;
         while (head != null && temp != null) {
+            // 当当前节点等于下一个节点的时候，将两个指针加1
             if (head.val != temp.val) {
                 head = temp;
                 temp = temp.next;
             } else {
+                //否则后一个指针指向下一个节点
                 temp = temp.next;
+                //前一个指针指向后一个指针
                 head.next = temp;
             }
         }
