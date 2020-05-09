@@ -1,8 +1,6 @@
 package com.hhb.algorithm.leetcode;
 
 
-import java.math.BigDecimal;
-
 /**
  * @author: huanghongbo
  * @Date: 2020-04-03 15:25
@@ -23,52 +21,105 @@ import java.math.BigDecimal;
 public class question_0002 {
 
 
+    /**
+     * 大数有问题
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Long resultL1 = getValue(l1);
+        Long resultL2 = getValue(l2);
+        Long result = resultL1 + resultL2;
+        ListNode node = new ListNode(-1);
+        ListNode n = new ListNode((int) (result % 10));
+        node.next = n;
+        while ((result = result / 10) > 0) {
+            ListNode temp = new ListNode((int) (result % 10));
+            n.next = temp;
+            n = temp;
+        }
+        return node.next;
 
-        java.math.BigDecimal result = new java.math.BigDecimal(0);
-        java.math.BigDecimal i = new java.math.BigDecimal(1);
-        while (l1 != null) {
-            BigDecimal bigDecimal = new BigDecimal(l1.val);
-            BigDecimal multiply = i.multiply(bigDecimal);
-            result.add(multiply);
-            l1 = l1.next;
-            i = i.multiply(new java.math.BigDecimal(10));
+    }
+
+    public static Long getValue(ListNode listNode) {
+        Long result = 0L;
+        Long index = 1L;
+        while (listNode != null) {
+            result += listNode.val * index;
+            index *= 10;
+            listNode = listNode.next;
         }
-        java.math.BigDecimal j = new java.math.BigDecimal(1);
-        while (l2 != null) {
-            result.add(j.multiply(new java.math.BigDecimal(l2.val)));
-            l2 = l2.next;
-            j = j.multiply(new java.math.BigDecimal(10));
+        return result;
+    }
+
+
+    public static ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
         }
-        String s = String.valueOf(result);
-        ListNode listNode = new ListNode(0);
-        ListNode temp = listNode;
-        for (int k = s.length() - 1; k >= 0; k--) {
-            String c = String.valueOf(s.charAt(k));
-            temp.next = new ListNode(Integer.valueOf(c));
-            temp = temp.next;
+        if (l2 == null) {
+            return l1;
         }
-        return listNode.next;
+        ListNode node = new ListNode(-1);
+        int result = l1.val + l2.val;
+        int index = result / 10;
+        ListNode n = new ListNode(result % 10);
+        node.next = n;
+        l1 = l1.next;
+        l2 = l2.next;
+        while (l1 != null || l2 != null) {
+            int index1 = l1 == null ? 0 : l1.val;
+            int index2 = l2 == null ? 0 : l2.val;
+            result = index1 + index2 + index;
+            index = result / 10;
+            ListNode temp = new ListNode(result % 10);
+            n.next = temp;
+            n = temp;
+            l1 = l1 == null ? null : l1.next;
+            l2 = l2 == null ? null : l2.next;
+        }
+        if (index > 0) {
+            ListNode temp = new ListNode(index);
+            n.next = temp;
+        }
+        return node.next;
     }
 
 
     public static void main(String[] args) {
-        ListNode listNode1 = new ListNode(1);
-        ListNode listNode2 = new ListNode(2);
-        ListNode listNode3 = new ListNode(4);
+        ListNode listNode1 = new ListNode(9);
+//        ListNode listNode2 = new ListNode(2);
+//        ListNode listNode3 = new ListNode(4);
 
         ListNode listNode4 = new ListNode(1);
-        ListNode listNode5 = new ListNode(3);
-        ListNode listNode6 = new ListNode(4);
+        ListNode listNode5 = new ListNode(9);
+        ListNode listNode6 = new ListNode(9);
+        ListNode listNode7 = new ListNode(9);
+        ListNode listNode8 = new ListNode(9);
+        ListNode listNode9 = new ListNode(9);
+        ListNode listNode10 = new ListNode(9);
+        ListNode listNode11 = new ListNode(9);
+        ListNode listNode12 = new ListNode(9);
+        ListNode listNode13 = new ListNode(9);
 
-        listNode1.next = listNode2;
-        listNode2.next = listNode3;
+//        listNode1.next = listNode2;
+//        listNode2.next = listNode3;
 
         listNode4.next = listNode5;
         listNode5.next = listNode6;
+        listNode6.next = listNode7;
+        listNode7.next = listNode8;
+        listNode8.next = listNode9;
+        listNode9.next = listNode10;
+        listNode10.next = listNode11;
+        listNode11.next = listNode12;
+        listNode12.next = listNode13;
 
 
-        ListNode listNode = addTwoNumbers(listNode1, listNode4);
+        ListNode listNode = addTwoNumbers2(listNode1, listNode4);
         while (listNode != null) {
             System.err.print(listNode.val + "===>>> ");
             listNode = listNode.next;
