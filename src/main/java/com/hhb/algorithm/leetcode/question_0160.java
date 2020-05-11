@@ -97,6 +97,20 @@ public class question_0160 {
         return headANode;
     }
 
+    public static ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+        ListNode newHeadA = headA;
+        ListNode newHeadB = headB;
+        while (newHeadA != null || newHeadB != null) {
+            if (newHeadA != newHeadB) {
+                newHeadA = newHeadA == null ? headB : newHeadA.next;
+                newHeadB = newHeadB == null ? headA : newHeadB.next;
+            } else {
+                return newHeadB;
+            }
+        }
+        return null;
+    }
+
 
     public static void main(String[] args) {
         ListNode listNode1 = new ListNode(1);
