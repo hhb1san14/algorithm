@@ -49,6 +49,29 @@ public class question_0069 {
     }
 
     public static void main(String[] args) {
-        System.err.println(mySqrt(2147395600));
+        System.err.println(mySqrt2(2147395600));
     }
+
+    public static int mySqrt2(int x) {
+        long max = x;
+        long min = 0;
+        while (true) {
+            min = getValue(max + min);
+            long result = min * min;
+            if (result == x) {
+                return (int) min;
+            } else if (result > x) {
+                max = min;
+                min = getValue(min);
+            } else {
+                if ((min + 1) * (min + 1) > x) {
+                    return (int) min;
+                }
+            }
+        }
+
+
+    }
+
+
 }
