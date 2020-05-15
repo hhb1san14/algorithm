@@ -19,7 +19,7 @@ package com.hhb.algorithm.leetcode;
  * 你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
  */
 //TODO:
-public class question_0234 {
+public class question_0234_undo {
 
 
     public static boolean isPalindrome(ListNode head) {
