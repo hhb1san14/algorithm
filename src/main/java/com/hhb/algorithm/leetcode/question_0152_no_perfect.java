@@ -19,7 +19,7 @@ package com.hhb.algorithm.leetcode;
  * 输出: 0
  * 解释: 结果不能为 2, 因为 [-2,-1] 不是子数组。
  */
-public class question_0152 {
+public class question_0152_no_perfect {
 
     public static int maxProduct(int[] nums) {
         if (nums.length == 1) {
