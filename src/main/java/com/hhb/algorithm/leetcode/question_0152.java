@@ -22,26 +22,26 @@ package com.hhb.algorithm.leetcode;
 public class question_0152 {
 
     public static int maxProduct(int[] nums) {
-
-
-        int max = nums[0];
-        int i = nums.length;
-        if()
-
-
-
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        int max = 0;
         for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if (max)
-
+            int temp = nums[i];
+            for (int j = i; j < nums.length; j++) {
+                if (j != i) {
+                    temp = temp * nums[j];
+                }
+                max = Math.max(max, temp);
             }
         }
+        return max;
 
     }
 
 
     public static void main(String[] args) {
-        int[] arr = {2, 3, -2, 4};
+        int[] arr = {-2, -1, 4};
         System.err.println(maxProduct(arr));
     }
 }
