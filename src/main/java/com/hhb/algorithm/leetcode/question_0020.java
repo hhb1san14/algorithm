@@ -92,7 +92,27 @@ public class question_0020 {
 
     public static void main(String[] args) {
         String s = "()";
-        System.err.println(isValid2(s));
+        System.err.println(isValid3(s));
     }
+
+
+    public static boolean isValid3(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            if ('{' == s.charAt(i) || '[' == s.charAt(i) || '(' == s.charAt(i)) {
+                stack.add(s.charAt(i));
+            } else {
+                if (('}' == s.charAt(i) && stack.pop() == '{')
+                        || (']' == s.charAt(i) && stack.pop() == '[')
+                        || (')' == s.charAt(i) && stack.pop() == '(')) {
+                    continue;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return stack.empty();
+    }
+
 
 }
