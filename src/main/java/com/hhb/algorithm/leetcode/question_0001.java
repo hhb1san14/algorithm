@@ -82,12 +82,6 @@ public class question_0001 {
     }
 
 
-    public static void main(String[] args) {
-        int[] array = {3, 2, 4};
-        int[] ints = twoSum3(array, 6);
-        System.err.println(ints[0] + "====" + ints[1]);
-    }
-
     /**
      * 官方：一遍哈希表 时间复杂度:O(n)
      *
@@ -106,5 +100,26 @@ public class question_0001 {
         throw new IllegalArgumentException("");
     }
 
+
+    public static int[] twoSum4(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap();
+        int arr[] = new int[2];
+        for (int i = 0; i < nums.length; i++) {
+            if (map.get(target - nums[i]) != null) {
+                arr[0] = i;
+                arr[1] = map.get(target - nums[i]);
+                break;
+            } else {
+                map.put(nums[i], i);
+            }
+        }
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        int[] array = {3, 2, 4};
+        int[] ints = twoSum4(array, 6);
+        System.err.println(ints[0] + "====" + ints[1]);
+    }
 
 }

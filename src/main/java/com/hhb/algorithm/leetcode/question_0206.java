@@ -56,7 +56,7 @@ public class question_0206 {
         listNode2.next = listNode3;
         listNode3.next = listNode4;
         listNode4.next = listNode5;
-        ListNode listNode = reverseList1(listNode1);
+        ListNode listNode = reverseList2(listNode1);
 
         while (listNode != null) {
             System.err.print(listNode.val + " ==>> ");
@@ -64,5 +64,25 @@ public class question_0206 {
         }
         System.err.print("NULL");
     }
+
+
+    public static ListNode reverseList2(ListNode head) {
+
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode pre = null;
+        ListNode curr = head;
+        ListNode next = null;
+        while (curr != null) {
+            next = curr.next;
+            curr.next = pre;
+            pre = curr;
+            curr = next;
+        }
+        return pre;
+
+    }
+
 
 }
