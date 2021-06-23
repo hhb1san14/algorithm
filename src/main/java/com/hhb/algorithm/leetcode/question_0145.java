@@ -1,7 +1,6 @@
 package com.hhb.algorithm.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @description: 145. 二叉树的后序遍历
@@ -29,12 +28,47 @@ public class question_0145 {
         list.add(root.val);
     }
 
+
+    public static List<Integer> postorderTraversal2(TreeNode root) {
+
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<Integer> result = new Stack<>();
+        if (root == null) {
+            return null;
+        }
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode treeNode = stack.pop();
+            result.push(treeNode.val);
+            if (treeNode.left != null) {
+                stack.push(treeNode.left);
+            }
+            if (treeNode.right != null) {
+                stack.push(treeNode.right);
+            }
+        }
+
+        while (!result.isEmpty()) {
+            list.add(result.pop());
+        }
+        return list;
+
+    }
+
+
     public static void main(String[] args) {
         //                  1
         //       2                      6
         //  3       4             7            8
         //              5             9     10
 
+        HashMap<String, String> stringStringHashMap = new HashMap<>();
+        stringStringHashMap.put("","");
+        HashSet<String> set = new HashSet<>();
+        set.add("");
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
 
         TreeNode root = new TreeNode(1);
         TreeNode left1 = new TreeNode(2);
@@ -55,8 +89,8 @@ public class question_0145 {
         right1.right = right3;
         right2.right = right4;
         right3.left = right5;
-        List<Integer> list = postorderTraversal(root);
-        System.err.println(list);
+        System.err.println(postorderTraversal(root));
+        System.err.println(postorderTraversal2(root));
 
 
     }

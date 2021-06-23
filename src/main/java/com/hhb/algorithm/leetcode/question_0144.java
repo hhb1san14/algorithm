@@ -2,6 +2,7 @@ package com.hhb.algorithm.leetcode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @description:144. 二叉树的前序遍历:https://leetcode-cn.com/problems/binary-tree-preorder-traversal/
@@ -35,6 +36,30 @@ public class question_0144 {
     }
 
 
+    public static List<Integer> preorderTraversal1(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if (root == null) {
+            return list;
+        }
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            list.add(node.val);
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+
+        return list;
+
+    }
+
+
     public static void main(String[] args) {
         //                  1
         //       2                      6
@@ -63,6 +88,8 @@ public class question_0144 {
         right3.left = right5;
         List<Integer> list = preorderTraversal(root);
         System.err.println(list);
+
+        System.err.println(preorderTraversal1(root));
 
 
     }
