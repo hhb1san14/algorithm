@@ -45,20 +45,27 @@ public class question_0015 {
         if (nums == null || nums.length < 3) {
             return result;
         }
+        // 排序，从小到大
         Arrays.sort(nums);
+        // 如果最小值 > 0，那么相加就不会出现等于0 的情况
         if (nums[0] > 0) {
             return result;
         }
+        // 遍历，一次取出
         for (int i = 0; i < nums.length; i++) {
-
+            // 如果当前取出的数 和 上一个数据是一样的，直接继续执行
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
+            // 利用双指针，第一个指针为当前数据的下一个，然后从左向右遍历
             int start = i + 1;
+            // 第二个指针是最后一个数据，从右向左遍历
             int end = nums.length - 1;
             while (start < end) {
+                // 如果总和大于0，右边的指针左移
                 if (nums[i] + nums[start] + nums[end] > 0) {
                     end--;
+                    //如果总和小于0，左边的指针右移
                 } else if (nums[i] + nums[start] + nums[end] < 0) {
                     start++;
                 } else {
@@ -67,8 +74,12 @@ public class question_0015 {
                     list.add(nums[start]);
                     list.add(nums[end]);
                     result.add(list);
-                    while (start < end && nums[start] == nums[++start]);
-                    while (start < end && nums[end] == nums[--end]);
+                    System.err.println(start + " " + end);
+                    // 如果当前start < end, 第一个指针当前值与 第一个指针下一个值相等的时候，一直做++start的操作
+                    while (start < end && nums[start] == nums[++start]) ;
+                    // 如果当前start < end, 第二个指针当前值与 第二个指针前一个值相等的时候，一直做--end的操作
+                    while (start < end && nums[end] == nums[--end]) ;
+                    System.err.println(start + " " + end);
                 }
             }
         }
@@ -76,8 +87,8 @@ public class question_0015 {
     }
 
     public static void main(String[] args) {
-        int[] nums = {-1, 0, 1, 2, -1, -4};
-//        int[] nums = {0, 0, 0, 0};
+//        int[] nums = {-1, 0, 1, 2, -1, -4};
+        int[] nums = {0, 0, 0, 0, 0, 0, 0, 0};
         System.err.println(threeSum(nums));
     }
 
