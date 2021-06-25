@@ -45,9 +45,31 @@ public class offer_004 {
     }
 
     public static void main(String[] args) {
-//        int[][] arr = {{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30}};
-        int[][] arr = {{-5}};
-        System.err.println(findNumberIn2DArray2(arr, -5));
+        int[][] arr = {{1, 4, 7, 11, 15}, {2, 5, 8, 12, 19}, {3, 6, 9, 16, 22}, {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30}};
+//        int[][] arr = {{-5}};
+        System.err.println(findNumberIn2DArray3(arr, 9));
+    }
+
+    public static boolean findNumberIn2DArray3(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0) {
+            return false;
+        }
+
+
+        int rows = matrix.length;
+        int high = matrix[0].length;
+        int i = 0;
+        int j = high - 1;
+        while (i < rows && j >= 0) {
+            if (matrix[i][j] < target) {
+                i++;
+            } else if (matrix[i][j] > target) {
+                j--;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
 

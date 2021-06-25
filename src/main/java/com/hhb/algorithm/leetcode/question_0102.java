@@ -1,6 +1,8 @@
 package com.hhb.algorithm.leetcode;
 
 import java.util.*;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * @description: 102. 二叉树的层序遍历
@@ -88,8 +90,35 @@ public class question_0102 {
         right2.right = right4;
         right3.left = right5;
         System.err.println(levelOrder(root));
+        System.err.println(levelOrder2(root));
+    }
 
+    public static List<List<Integer>> levelOrder2(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        if (root == null) {
+            return list;
+        }
 
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> l = new ArrayList<>();
+            while (size > 0) {
+                TreeNode treeNode = queue.poll();
+                l.add(treeNode.val);
+                if (treeNode.left != null) {
+                    queue.add(treeNode.left);
+                }
+                if (treeNode.right != null) {
+                    queue.add(treeNode.right);
+                }
+                size--;
+            }
+            list.add(l);
+        }
+        return list;
     }
 
 

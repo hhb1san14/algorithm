@@ -61,6 +61,7 @@ public class question_0019 {
         listNode3.next = listNode4;
         listNode4.next = listNode5;
 
+        System.err.println(removeNthFromEnd2(listNode1, 1));
 
         ListNode listNode = reserve(listNode1);
         while (listNode != null) {
@@ -71,7 +72,7 @@ public class question_0019 {
 
     public static ListNode removeNthFromEnd2(ListNode head, int n) {
         if (head == null) {
-            return null;
+            return head;
         }
         ListNode node = head;
         while (n > 0) {
@@ -86,13 +87,15 @@ public class question_0019 {
             curr = curr.next;
             node = node.next;
         }
-
-        if (curr.next != null) {
-            curr.next = curr.next.next;
-        } else {
+        if (curr.next == null) {
             curr.next = null;
+        } else {
+            curr.next = curr.next.next;
         }
+
+
         return head;
+
     }
 
     public static ListNode reserve(ListNode head) {

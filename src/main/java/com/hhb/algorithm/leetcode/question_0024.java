@@ -51,6 +51,24 @@ public class question_0024 {
     }
 
 
+    public static ListNode swapPairs2(ListNode head) {
+        ListNode root = new ListNode(-1);
+        root.next = head;
+        ListNode temp = root;
+        while (temp.next != null && temp.next.next != null) {
+            ListNode node1 = temp.next;
+            ListNode node2 = temp.next.next;
+            temp.next = node2;
+            node1.next = node2.next;
+            node2.next = node1;
+            temp = node1;
+        }
+        return root.next;
+
+
+    }
+
+
     public static void main(String[] args) {
         ListNode listNode1 = new ListNode(1);
         ListNode listNode2 = new ListNode(2);
@@ -64,12 +82,13 @@ public class question_0024 {
         listNode3.next = listNode4;
         listNode4.next = listNode5;
 //        listNode5.next = listNode6;
-
-        ListNode listNode = swapPairs(listNode1);
+//        swapPairs2(listNode1);
+        ListNode listNode = swapPairs2(listNode1);
         while (listNode != null) {
             System.err.print(listNode.val + "===>>> ");
             listNode = listNode.next;
         }
+
 
     }
 

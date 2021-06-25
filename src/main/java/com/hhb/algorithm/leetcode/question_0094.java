@@ -83,7 +83,54 @@ public class question_0094 {
         List<Integer> list = inorderTraversal(root);
         System.err.println(list);
         System.err.println(inorderTraversal2(root));
+        //中
+        System.err.println(inorderTraversal3(root));
 
 
+        System.err.println(inorderTraversal4(root));
+        //前
+    }
+
+    //左 中 右
+    public static List<Integer> inorderTraversal3(TreeNode root) {
+
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if (root == null) {
+            return list;
+        }
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            TreeNode treeNode = stack.pop();
+            list.add(treeNode.val);
+            root = treeNode.right;
+        }
+
+        return list;
+    }
+
+    // 中 左 右
+    public static List<Integer> inorderTraversal4(TreeNode root) {
+
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if (root == null) {
+            return list;
+        }
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode treeNode = stack.pop();
+            list.add(treeNode.val);
+            if (treeNode.right != null) {
+                stack.push(treeNode.right);
+            }
+            if (treeNode.left != null) {
+                stack.push(treeNode.left);
+            }
+        }
+        return list;
     }
 }
