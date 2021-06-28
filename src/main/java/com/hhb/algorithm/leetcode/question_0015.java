@@ -74,12 +74,10 @@ public class question_0015 {
                     list.add(nums[start]);
                     list.add(nums[end]);
                     result.add(list);
-                    System.err.println(start + " " + end);
                     // 如果当前start < end, 第一个指针当前值与 第一个指针下一个值相等的时候，一直做++start的操作
                     while (start < end && nums[start] == nums[++start]) ;
                     // 如果当前start < end, 第二个指针当前值与 第二个指针前一个值相等的时候，一直做--end的操作
                     while (start < end && nums[end] == nums[--end]) ;
-                    System.err.println(start + " " + end);
                 }
             }
         }
@@ -87,9 +85,48 @@ public class question_0015 {
     }
 
     public static void main(String[] args) {
-//        int[] nums = {-1, 0, 1, 2, -1, -4};
-        int[] nums = {0, 0, 0, 0, 0, 0, 0, 0};
+        int[] nums = {-1, 0, 1, 2, -1, -4};
+//        int[] nums = {0, 0, 0, 0, 0, 0, 0, 0};
         System.err.println(threeSum(nums));
+        System.err.println(threeSum2(nums));
     }
+
+
+    public static List<List<Integer>> threeSum2(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if (nums == null || nums.length < 3) {
+            return result;
+        }
+
+        Arrays.sort(nums);
+        if (nums[0] > 0) {
+            return result;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int start = i + 1;
+            int end = nums.length - 1;
+            while (start < end) {
+                if (nums[i] + nums[start] + nums[end] > 0) {
+                    end--;
+                } else if (nums[i] + nums[start] + nums[end] < 0) {
+                    start++;
+                } else {
+                    List<Integer> list = new ArrayList<>();
+                    list.add(nums[i]);
+                    list.add(nums[start]);
+                    list.add(nums[end]);
+                    result.add(list);
+                    while (start < end && nums[start] == nums[--end]) ;
+                    while (start < end && nums[++start] == nums[end]) ;
+                }
+            }
+        }
+        return result;
+    }
+
 
 }
