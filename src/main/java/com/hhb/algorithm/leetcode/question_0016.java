@@ -28,10 +28,6 @@ import java.util.Arrays;
  **/
 public class question_0016 {
 
-
-
-
-
     public static int threeSumClosest(int[] nums, int target) {
         // 排序
         Arrays.sort(nums);
