@@ -38,10 +38,27 @@ public class question_0035 {
 
     }
 
+    public static int searchInsert2(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length - 1;
+        while (low <= high) {
+            int temp = low + (high - low) / 2;
+            if (nums[temp] < target) {
+                low = temp + 1;
+            } else if (nums[temp] > target) {
+                high = temp - 1;
+            } else {
+                return temp;
+            }
+        }
+        return low;
+
+    }
+
 
     public static void main(String[] args) {
         int[] arr = {1, 3, 5, 6};
-        System.err.println(searchInsert(arr, 7));
+        System.err.println(searchInsert2(arr, 2));
     }
 
 }
