@@ -18,6 +18,7 @@ package com.hhb.algorithm.leetcode;
 public class question_0283 {
 
 
+    //双指针
     public static void moveZeroes(int[] nums) {
         int index = 0;
         int temp = 0;

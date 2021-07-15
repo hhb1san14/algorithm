@@ -73,12 +73,11 @@ public class question_0206 {
         }
         ListNode pre = null;
         ListNode curr = head;
-        ListNode next = null;
         while (curr != null) {
-            next = curr.next;
+            ListNode temp = curr.next;
             curr.next = pre;
             pre = curr;
-            curr = next;
+            curr = temp;
         }
         return pre;
 
