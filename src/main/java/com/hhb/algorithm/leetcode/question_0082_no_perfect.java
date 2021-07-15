@@ -1,5 +1,8 @@
 package com.hhb.algorithm.leetcode;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * @author: huanghongbo
  * @Date: 2020-05-12 14:49
@@ -15,50 +18,34 @@ package com.hhb.algorithm.leetcode;
  * 输入: 1->1->1->2->3
  * 输出: 2->3
  */
-public class question_0082_undo {
+public class question_0082_no_perfect {
 
     public static ListNode deleteDuplicates(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
-        while (head != null && head.next != null && head.val == head.next.val) {
-            head = getHead(head);
-        }
-        ListNode pre = head;
-        ListNode curr = head.next;
-        ListNode next = null;
-        if (curr != null) {
-            next = curr.next;
-        }
-        while (curr != null && next != null) {
-            if (curr.val != next.val) {
-                pre = pre.next;
-                curr = curr.next;
-                next = next.next;
+        TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+        while (head != null) {
+            if (treeMap.containsKey(head.val)) {
+                treeMap.put(head.val, treeMap.get(head.val) + 1);
             } else {
-                curr = curr.next;
-                next = next.next;
+                treeMap.put(head.val, 0);
             }
-
-
-        }
-
-
-        return head;
-    }
-
-    public static ListNode getHead(ListNode head) {
-        while (head != null && head.next != null) {
             head = head.next;
-            if (head.next == null) {
-                return null;
-            }
-            if (head.val != head.next.val) {
-                head = head.next;
-                return head;
+        }
+        ListNode temp = new ListNode(-1);
+        ListNode curr = new ListNode(-1);
+        temp.next = curr;
+        for (Map.Entry<Integer, Integer> entry : treeMap.entrySet()) {
+            Integer key = entry.getKey();
+            Integer value = entry.getValue();
+            if (value == 0) {
+                ListNode node = new ListNode(key);
+                curr.next = node;
+                curr = node;
             }
         }
-        return head;
+        return temp.next.next;
     }
 
 
