@@ -51,9 +51,32 @@ public class question_0704 {
     }
 
 
+    public static int search2(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+        if (nums[0] > target || nums[nums.length - 1] < target) {
+            return -1;
+        }
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int middle = left + (right - left) / 2;
+            if (nums[middle] > target) {
+                right = middle - 1;
+            } else if (nums[middle] < target) {
+                left = middle + 1;
+            } else {
+                return middle;
+            }
+        }
+        return -1;
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {-1, 0, 3, 5, 9, 12};
-        System.err.println(search(arr, 9));
+        System.err.println(search2(arr, 9));
     }
 
 }
