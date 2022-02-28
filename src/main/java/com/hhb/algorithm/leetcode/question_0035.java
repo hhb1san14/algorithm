@@ -39,9 +39,37 @@ public class question_0035 {
     }
 
 
+    public static int searchInsert2(int[] nums, int target) {
+        if (nums[0] > target) {
+            return 0;
+        }
+        if (nums[nums.length - 1] < target) {
+            return nums.length;
+        }
+        int left = 0;
+        int right = nums.length;
+        while (left <= right) {
+            int middle = left + (right - left) / 2;
+            if (nums[middle] == target) {
+                System.gc();
+                return middle;
+            }
+            if (nums[middle] < target && nums[middle + 1] > target) {
+                System.gc();
+                return middle + 1;
+            }
+            if (nums[middle] < target) {
+                left = middle + 1;
+            } else if (nums[middle] > target) {
+                right = middle - 1;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         int[] arr = {1, 3, 5, 6};
-        System.err.println(searchInsert(arr, 7));
+        System.err.println(searchInsert2(arr, 2));
     }
 
 }
