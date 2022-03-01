@@ -64,7 +64,7 @@ public class question_0977 {
             }
             pos--;
         }
-        return nums;
+        return result;
     }
 
     public static void main(String[] args) {
