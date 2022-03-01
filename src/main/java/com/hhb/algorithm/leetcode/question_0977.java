@@ -38,7 +38,7 @@ import java.util.Arrays;
  * 链接：https://leetcode-cn.com/problems/squares-of-a-sorted-array
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class question_0977_no_perfect {
+public class question_0977 {
 
     public int[] sortedSquares(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
@@ -47,4 +47,29 @@ public class question_0977_no_perfect {
         Arrays.sort(nums);
         return nums;
     }
+
+
+    public static int[] sortedSquares2(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        int pos = nums.length - 1;
+        int [] result = new int[nums.length];
+        while (left <= right) {
+            if (nums[left] * nums[left] >= nums[right] * nums[right]) {
+                result[pos] = nums[left] * nums[left];
+                left++;
+            } else {
+                result[pos] = nums[right] * nums[right];
+                right--;
+            }
+            pos--;
+        }
+        return nums;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {-4, -1, 0, 3, 10};
+        sortedSquares2(nums);
+    }
+
 }
