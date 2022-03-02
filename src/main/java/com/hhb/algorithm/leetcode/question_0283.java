@@ -31,10 +31,35 @@ public class question_0283 {
         }
     }
 
+    public static void moveZeroes2(int[] nums) {
+        int index = 0;
+        int temp = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                temp = nums[index];
+                nums[index] = nums[i];
+                nums[i] = temp;
+                index++;
+            }
+        }
+    }
+
+    public static void moveZeroes3(int[] nums) {
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        for (int i = j; i < nums.length; i++) {
+            nums[i] = 0;
+        }
+    }
 
     public static void main(String[] args) {
-        int[] arr = {0, 1, 0, 3, 12};
-        moveZeroes(arr);
+        int[] arr = {1, 0};
+        moveZeroes2(arr);
         for (int i = 0; i < arr.length; i++) {
             System.err.print(arr[i] + " == >> ");
         }
