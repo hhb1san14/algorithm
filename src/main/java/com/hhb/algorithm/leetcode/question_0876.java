@@ -68,6 +68,22 @@ public class question_0876 {
     }
 
 
+    /**
+     * 双指针，快慢指针法，一个指针一次走一步，一个指针一次走两步，
+     * 快指针走到头，慢指针走一般
+     * @param head
+     * @return
+     */
+    public static ListNode middleNode3(ListNode head) {
+        ListNode pre = head, node = head;
+        while (pre != null && node != null && node.next != null) {
+            pre = pre.next;
+            node = node.next.next;
+        }
+        return pre;
+    }
+
+
     public static void main(String[] args) {
         ListNode listNode1 = new ListNode(1);
         ListNode listNode2 = new ListNode(2);
@@ -81,7 +97,7 @@ public class question_0876 {
         listNode4.next = listNode5;
         listNode5.next = listNode6;
 
-        ListNode listNode = middleNode2(listNode1);
+        ListNode listNode = middleNode3(listNode1);
         System.err.println(listNode.val);
     }
 }
