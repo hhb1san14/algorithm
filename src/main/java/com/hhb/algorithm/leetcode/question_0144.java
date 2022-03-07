@@ -82,9 +82,22 @@ public class question_0144 {
         right1.right = right3;
         right2.right = right4;
         right3.left = right5;
-        List<Integer> list = preorderTraversal(root);
+        List<Integer> list = preorderTraversal2(root);
         System.err.println(list);
+    }
 
+    public static List<Integer> preorderTraversal2(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        preorderTraversal2(root, list);
+        return list;
+    }
 
+    private static void preorderTraversal2(TreeNode root, List<Integer> list) {
+        if (root == null) {
+            return;
+        }
+        list.add(root.val);
+        preorderTraversal2(root.left, list);
+        preorderTraversal2(root.right, list);
     }
 }
