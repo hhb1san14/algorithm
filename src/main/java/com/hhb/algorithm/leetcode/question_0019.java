@@ -113,7 +113,6 @@ public class question_0019 {
 
     public static boolean isValid(String s) {
         Stack<String> str = new Stack<>();
-
         if (s.length() % 2 != 0) {
             return false;
         }
@@ -131,7 +130,6 @@ public class question_0019 {
             }
         }
         return str.size() == 0;
-
     }
 
     public static ListNode removeNthFromEnd3(ListNode head, int n) {
@@ -155,6 +153,4 @@ public class question_0019 {
         }
         return head;
     }
-
-
 }
