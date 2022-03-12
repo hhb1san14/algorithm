@@ -82,7 +82,7 @@ public class question_0144 {
         right1.right = right3;
         right2.right = right4;
         right3.left = right5;
-        List<Integer> list = preorderTraversal3(root);
+        List<Integer> list = preorderTraversal4(root);
         System.err.println(list);
     }
 
@@ -108,20 +108,36 @@ public class question_0144 {
      * @return
      */
     public static List<Integer> preorderTraversal3(TreeNode root) {
-       List<Integer> list = new ArrayList<>();
-       Stack<TreeNode> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
 
-       while (root != null || !stack.isEmpty()){
-           while (root != null){
-               list.add(root.val);
-               stack.add(root);
-               root = root.left;
-           }
-           TreeNode pop = stack.pop();
-           if(pop.right!= null){
-               root = pop.right;
-           }
-       }
-       return list;
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                list.add(root.val);
+                stack.add(root);
+                root = root.left;
+            }
+            TreeNode pop = stack.pop();
+            if (pop.right != null) {
+                root = pop.right;
+            }
+        }
+        return list;
+    }
+
+
+    public static List<Integer> preorderTraversal4(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            TreeNode treeNode = stack.pop();
+            list.add(treeNode.val);
+            root = treeNode.right;
+        }
+        return list;
     }
 }
