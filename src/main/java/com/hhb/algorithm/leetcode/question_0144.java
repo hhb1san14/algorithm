@@ -85,7 +85,6 @@ public class question_0144 {
         List<Integer> list = preorderTraversal4(root);
         System.err.println(list);
     }
-
     public static List<Integer> preorderTraversal2(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         preorderTraversal2(root, list);
