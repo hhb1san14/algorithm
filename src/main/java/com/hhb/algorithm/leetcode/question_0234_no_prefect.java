@@ -1,6 +1,9 @@
 package com.hhb.algorithm.leetcode;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author: huanghongbo
  * @Date: 2020-04-14 14:38
@@ -19,35 +22,26 @@ package com.hhb.algorithm.leetcode;
  * 你能否用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题？
  */
 //TODO:
-public class question_0234_undo {
+public class question_0234_no_prefect {
 
 
     public static boolean isPalindrome(ListNode head) {
-        if (head == null || head.next == null) {
-            return true;
+        List<Integer> list = new ArrayList<>();
+        ListNode temp = head;
+        while (temp != null) {
+            list.add(temp.val);
+            temp = temp.next;
         }
-        ListNode node = new ListNode(0);
-
-        while (head != null) {
-
+        int n = list.size() - 1;
+        while (n >= 0){
+            if(list.get(n--) == head.val){
+                head = head.next;
+                continue;
+            }else {
+                return false;
+            }
         }
-
-
-        ListNode curr = head;
-        ListNode pre = null;
-        ListNode next = null;
-        while (curr != null) {
-            next = curr.next;
-            curr.next = pre;
-            pre = curr;
-            curr = next;
-
-        }
-
-
-        return false;
-
-
+        return true;
     }
 
     public static void main(String[] args) {
@@ -55,11 +49,11 @@ public class question_0234_undo {
         ListNode listNode1 = new ListNode(1);
         ListNode listNode2 = new ListNode(2);
         ListNode listNode3 = new ListNode(2);
-//        ListNode listNode4 = new ListNode(1);
+        ListNode listNode4 = new ListNode(1);
 //        ListNode listNode5 = new ListNode(5);
         listNode1.next = listNode2;
         listNode2.next = listNode3;
-//        listNode3.next = listNode4;
+        listNode3.next = listNode4;
 //        listNode4.next = listNode5;
         boolean result = isPalindrome(listNode1);
         System.err.println(result);
