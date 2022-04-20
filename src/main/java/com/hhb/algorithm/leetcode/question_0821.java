@@ -52,9 +52,30 @@ public class question_0821 {
         }
         return result;
     }
+    //两次遍历，向左遍历一次，计算最左边值的大小
+    // 在向右遍历一次，计算最右边值的大小与距离左边值大小比对
+    public static int[] shortestToChar2(String s, char c) {
+        int n = s.length();
+        int[] ans = new int[n];
+
+        for (int i = 0, idx = -n; i < n; ++i) {
+            if (s.charAt(i) == c) {
+                idx = i;
+            }
+            ans[i] = i - idx;
+        }
+
+        for (int i = n - 1, idx = 2 * n; i >= 0; --i) {
+            if (s.charAt(i) == c) {
+                idx = i;
+            }
+            ans[i] = Math.min(ans[i], idx - i);
+        }
+        return ans;
+    }
 
     public static void main(String[] args) {
-        int[] result = shortestToChar("loveleetcode", 'e');
+        int[] result = shortestToChar2("loveleetcode", 'e');
         for (int i = 0; i < result.length; i++) {
             System.err.println(result[i]);
         }
