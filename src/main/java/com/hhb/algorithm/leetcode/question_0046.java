@@ -34,6 +34,31 @@ import java.util.List;
  **/
 public class question_0046 {
 
+    public static void main(String[] args) {
+        System.err.println(permute2(new int[]{1, 2, 3}));
+    }
+
+    public static List<List<Integer>> permute2(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        permute2(nums, list, new ArrayList<>());
+        return list;
+    }
+
+
+    public static void permute2(int[] nums, List<List<Integer>> list, List<Integer> tempList) {
+        if (tempList.size() == nums.length) {
+            list.add(new ArrayList<>(tempList));
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (tempList.contains(nums[i])) {
+                continue;
+            }
+            tempList.add(nums[i]);
+            permute2(nums, list, tempList);
+            tempList.remove(tempList.size() - 1);
+        }
+    }
+
 
     public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
@@ -61,9 +86,9 @@ public class question_0046 {
         }
     }
 
-    public static void main(String[] args) {
-        permute(new int[]{1, 2, 3});
-    }
+//    public static void main(String[] args) {
+//        permute(new int[]{1, 2, 3});
+//    }
 
 
 }
