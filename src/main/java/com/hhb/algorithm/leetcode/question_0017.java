@@ -89,7 +89,35 @@ public class question_0017 {
     }
 
 
+    public static List<String> letterCombinations1(String digits) {
+        List<String> list = new ArrayList<>();
+        if (digits.length() < 1) {
+            return list;
+        }
+
+        letterCombinations1(list, digits, new StringBuilder(), 0);
+        return list;
+    }
+
+    private static void letterCombinations1(List<String> list, String digits, StringBuilder sb, int depth) {
+        System.err.println("sb ==>" + sb + ",depth ==>>" + depth);
+        if (depth == digits.length()) {
+            list.add(sb.toString());
+            return;
+        } else {
+            String str = map.get(digits.charAt(depth));
+            for (int i = 0; i < str.length(); i++) {
+                sb.append(str.charAt(i));
+                letterCombinations1(list, digits, sb, depth + 1);
+                sb.deleteCharAt(sb.length() - 1);
+            }
+
+        }
+    }
+
+
     public static void main(String[] args) {
-        letterCombinations("23");
+        List<String> strings = letterCombinations1("23");
+        System.err.println(strings);
     }
 }
