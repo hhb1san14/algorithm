@@ -19,20 +19,20 @@ import java.util.Queue;
  * 输出：9
  */
 public class question_0042 {
-    public int trap(int[] height) {
-        int left = -1;
-        int right = -1;
-        Queue<Integer> queue = new LinkedList<>();
-        for (int i = 0; i < height.length; i++) {
-            if (left == -1 && height[i] == 0) {
-                continue;
-            } else {
-                left = height[i];
-                queue.add(height[i]);
-            }
-
-        }
-    }
+//    public int trap(int[] height) {
+//        int left = -1;
+//        int right = -1;
+//        Queue<Integer> queue = new LinkedList<>();
+//        for (int i = 0; i < height.length; i++) {
+//            if (left == -1 && height[i] == 0) {
+//                continue;
+//            } else {
+//                left = height[i];
+//                queue.add(height[i]);
+//            }
+//
+//        }
+//    }
 
 
 }

@@ -57,9 +57,54 @@ public class question_0283 {
         }
     }
 
+    public static void moveZeroes4(int[] arr) {
+        if (arr.length <= 1) {
+            return;
+        }
+        int left = 0;
+        while (left < arr.length) {
+            if (arr[left] == 0) {
+                break;
+            } else {
+                left++;
+            }
+        }
+        int right = left;
+        while (right < arr.length) {
+            if (arr[right] == 0) {
+                right++;
+            } else {
+                if (left == right) {
+                    left++;
+                    right++;
+                } else {
+                    arr[left++] = arr[right++];
+                }
+            }
+        }
+        while (left < arr.length) {
+            arr[left] = 0;
+            left++;
+        }
+    }
+
+
+    public static void moveZeroes5(int[] nums) {
+        int j = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[j] = nums[i];
+                if (i != j) {
+                    nums[i] = 0;
+                }
+                j++;
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        int[] arr = {1, 0};
-        moveZeroes2(arr);
+        int[] arr = {1, 0, 3, 0, 0, 12, 0};
+        moveZeroes5(arr);
         for (int i = 0; i < arr.length; i++) {
             System.err.print(arr[i] + " == >> ");
         }
