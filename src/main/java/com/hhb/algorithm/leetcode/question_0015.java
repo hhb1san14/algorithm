@@ -89,6 +89,46 @@ public class question_0015 {
 //        int[] nums = {0, 0, 0, 0, 0, 0, 0, 0};
         System.err.println(threeSum(nums));
         System.err.println(threeSum2(nums));
+        System.err.println(threeSum3(nums));
+    }
+
+    private static List<List<Integer>> threeSum3(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        if (nums.length < 3) {
+            return list;
+        }
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length; i++) {
+            // 当i 不是 0的时候，当前语句与上一个数据的值相同，跳过
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int start = i + 1;
+            int end = nums.length - 1;
+            while (start < end) {
+                if (nums[i] + nums[start] + nums[end] > 0) {
+                    end--;
+                } else if (nums[i] + nums[start] + nums[end] < 0) {
+                    start++;
+                } else {
+                    List<Integer> temp = new ArrayList<>();
+                    temp.add(nums[i]);
+                    temp.add(nums[start]);
+                    temp.add(nums[end]);
+                    list.add(temp);
+                    start++;
+                    end--;
+                    while (start < end && nums[start] == nums[start + 1]) {
+                        start++;
+                    }
+                    while (start < end && nums[end] == nums[end - 1]) {
+                        end--;
+                    }
+                }
+            }
+        }
+        return list;
     }
 
 
