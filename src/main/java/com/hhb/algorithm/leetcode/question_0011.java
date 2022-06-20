@@ -70,10 +70,26 @@ public class question_0011 {
         return max;
     }
 
+    public static int maxArea3(int[] height) {
+        int left = 0;
+        int right = height.length - 1;
+        int max = Integer.MIN_VALUE;
+        while (left < right) {
+            int temp = Math.min(height[left], height[right]) * (right - left);
+            max = Math.max(max, temp);
+            if (height[left] <= height[right]) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return max;
+    }
+
 
     public static void main(String[] args) {
         int[] array = {1, 8, 6, 2, 5, 4, 8, 3, 7};
-        System.err.println(maxArea2(array));
+        System.err.println(maxArea3(array));
     }
 
 
