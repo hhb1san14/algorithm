@@ -84,5 +84,16 @@ public class question_0206 {
 
     }
 
+    public static ListNode reverseList3(ListNode head) {
+        ListNode pre = null;
+        while (head != null) {
+            ListNode curr = head.next;
+            head.next = pre;
+            pre = head;
+            head = curr;
+        }
+        return pre;
+    }
+
 
 }
