@@ -1,6 +1,5 @@
 package com.hhb.algorithm.leetcode;
 
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 /**
  * @author: huanghongbo
