@@ -62,7 +62,7 @@ public class question_0142 {
                 break;
             }
         }
-        if(!flag){
+        if (!flag) {
             return null;
         }
         flow = head;
@@ -77,15 +77,39 @@ public class question_0142 {
     public static void main(String[] args) {
         ListNode listNode1 = new ListNode(1);
         ListNode listNode2 = new ListNode(2);
-//        ListNode listNode3 = new ListNode(3);
-//        ListNode listNode4 = new ListNode(4);
-//        ListNode listNode5 = new ListNode(5);
+        ListNode listNode3 = new ListNode(3);
+        ListNode listNode4 = new ListNode(4);
+        ListNode listNode5 = new ListNode(5);
         listNode1.next = listNode2;
-//        listNode2.next = listNode3;
-//        listNode3.next = listNode4;
-//        listNode4.next = listNode5;
-//        listNode5.next = listNode3;
-        ListNode listNode = detectCycle(listNode1);
+        listNode2.next = listNode3;
+        listNode3.next = listNode4;
+        listNode4.next = listNode5;
+        listNode5.next = listNode3;
+        ListNode listNode = detectCycle2(listNode1);
 
+    }
+
+    public static ListNode detectCycle2(ListNode head) {
+        if (head == null || head.next == null) {
+            return null;
+        }
+        ListNode slow = head;
+        ListNode fast = head;
+        while (true) {
+            if (slow == null || fast == null || fast.next == null) {
+                return null;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                break;
+            }
+        }
+        slow = head;
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
     }
 }
