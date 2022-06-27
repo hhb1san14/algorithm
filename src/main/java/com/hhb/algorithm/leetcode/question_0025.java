@@ -43,9 +43,20 @@ public class question_0025 {
             }
             //反转pre 到 tail 之间的节点
             // 遍历过程如下： 假设 k = 3，
-            // 1 -> 2 -> 3 -> 4 -> 5 原始节点
-            // 2 -> 1 -> 3 -> 4 -> 5 第一次遍历
-            // 3 -> 2 -> 1 -> 4 -> 5 第二次遍历
+            //pre -> 1 -> 2 -> 3 -> 4 -> 5 原始节点
+            //第一次遍历:
+            // 1、先定义一个curr节点， curr 节点 为 pre.next ,curr = 1 -> 2 -> 3 -> 4 -> 5
+            // 2、那么 next 节点 就是 curr.next,next =  2 -> 3 -> 4 -> 5
+            // 3、让curr的next指向到 next的next，即 curr.next = next.next, 此时curr = 1 -> 3 -> 4 -> 5
+            // 4、让 next的next指向pre.next，即next.next = pre.next;此时next = 2 -> 1 -> 3 -> 4 -> 5
+            // 5、现在pre为 pre -> 1 -> 3 -> 4 -> 5,应该让 pre 指向 2，即 pre.next = next; pre : pre -> 2 -> 1 -> 3 -> 4 -> 5
+            // 第二次遍历：
+            // 1、此时curr节点为1 -> 3 -> 4 -> 5。
+            // 2、那么 next 节点 就是 curr.next,next =  3 -> 4 -> 5
+            // 3、让curr.next = next.next ,此时 curr = 1 -> 4 -> 5
+            // 4、让 next.next 指向 pre.next, next = >3 -> 2 -> 1 -> 4 -> 5
+            // 5、现在pre为 pre -> 2 -> 1 -> 4 -> 5,应该让 pre 指向 3，即 pre.next = next; pre : pre -3 -> 2 -> 1 -> 4 -> 5
+            //遍历介绍，此时curr 为 1，那么应该让pre = 1.即 pre = curr；
             ListNode curr = pre.next, next;
             for (int i = 0; i < k - 1; i++) {
                 next = curr.next;
