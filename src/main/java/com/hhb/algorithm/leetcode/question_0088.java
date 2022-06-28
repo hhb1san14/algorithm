@@ -1,5 +1,7 @@
 package com.hhb.algorithm.leetcode;
 
+import java.util.Arrays;
+
 /**
  * @author: huanghongbo
  * @Date: 2020-03-31 17:18
@@ -137,7 +139,15 @@ public class question_0088 {
         int[] nums1 = {4, 5, 6, 0, 0, 0};
         int m = 3, n = 3;
         int[] nums2 = {1, 2, 3};
-        merge3(nums1, m, nums2, n);
+        merge4(nums1, m, nums2, n);
+    }
+
+    public static void merge4(int[] nums1, int m, int[] nums2, int n) {
+        int index = 0;
+        for (int i = m; i < m + n; i++) {
+            nums1[i] = nums2[index++];
+        }
+        Arrays.sort(nums1);
     }
 
 
