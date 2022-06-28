@@ -75,11 +75,35 @@ public class question_0021 {
         listNode4.next = listNode5;
         listNode5.next = listNode6;
 
-        ListNode listNode = mergeTwoLists(listNode1, listNode4);
+        ListNode listNode = mergeTwoLists2(listNode1, listNode4);
         while (listNode != null) {
             System.err.print(listNode.val + "===>>> ");
             listNode = listNode.next;
         }
+    }
+
+
+    public static ListNode mergeTwoLists2(ListNode list1, ListNode list2) {
+        ListNode temp = new ListNode(-1);
+        ListNode head = new ListNode(-1, temp);
+        while (list1 != null || list2 != null) {
+            if (list1 == null) {
+                temp.next = list2;
+                break;
+            } else if (list2 == null) {
+                temp.next = list1;
+                break;
+            } else if (list1 != null && list2 != null && list1.val > list2.val) {
+                temp.next = list2;
+                temp = temp.next;
+                list2 = list2.next;
+            } else if (list1 != null && list2 != null && list1.val <= list2.val) {
+                temp.next = list1;
+                list1 = list1.next;
+                temp = temp.next;
+            }
+        }
+        return head.next.next;
     }
 
 
