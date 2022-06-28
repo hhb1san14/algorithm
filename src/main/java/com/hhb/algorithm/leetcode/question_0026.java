@@ -91,10 +91,26 @@ public class question_0026 {
         return i + 1;
     }
 
+    /**
+     * 双指针
+     *
+     * @param nums
+     * @return
+     */
+    public static int removeDuplicates2(int[] nums) {
+        int left = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[left] == nums[i]) {
+                continue;
+            }
+            nums[++left] = nums[i];
+        }
+        return left + 1;
+    }
 
     public static void main(String[] args) {
         int[] array = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-        int length = removeDuplicates1(array);
+        int length = removeDuplicates2(array);
         for (int i = 0; i < length; i++) {
             System.err.print(array[i]);
         }
