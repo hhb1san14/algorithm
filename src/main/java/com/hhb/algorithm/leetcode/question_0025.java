@@ -68,6 +68,30 @@ public class question_0025 {
         }
     }
 
+
+    public static ListNode reverseKGroup2(ListNode head, int k) {
+        ListNode dummy = new ListNode(-1, head);
+        ListNode pre = dummy;
+        while (true) {
+            ListNode tail = pre;
+            for (int i = 0; i < k; i++) {
+                tail = tail.next;
+                if (tail == null) {
+                    return dummy.next;
+                }
+            }
+
+            ListNode curr = pre.next, next;
+            for (int i = 0; i < k - 1; i++) {
+                next = curr.next;
+                curr.next = next.next;
+                next.next = pre.next;
+                pre.next = next;
+            }
+            pre = curr;
+        }
+    }
+
     public static void main(String[] args) {
         ListNode listNode1 = new ListNode(1);
         ListNode listNode2 = new ListNode(2);
@@ -78,7 +102,8 @@ public class question_0025 {
         listNode2.next = listNode3;
         listNode3.next = listNode4;
         listNode4.next = listNode5;
-        reverseKGroup(listNode1, 3);
+        ListNode listNode = reverseKGroup2(listNode1, 2);
+        System.err.println("===");
 
     }
 
