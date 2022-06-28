@@ -52,6 +52,7 @@ public class question_0189 {
         reversal(nums, 0, result - 1);
         reversal(nums, result, nums.length - 1);
     }
+
     private static void reversal(int[] nums, int start, int end) {
         while (start < end) {
             int temp = nums[start];
@@ -59,9 +60,34 @@ public class question_0189 {
             nums[end--] = temp;
         }
     }
+
+
+    public static void rotate2(int[] nums, int k) {
+        k = k % nums.length;
+        int[] arr1 = new int[k];
+        int[] arr2 = new int[nums.length - k];
+        int left = 0;
+        for (int i = 0; i < nums.length - k; i++) {
+            arr2[i] = nums[i];
+        }
+        for (int i = nums.length - k; i < nums.length; i++) {
+            arr1[left++] = nums[i];
+        }
+        int i = 0;
+        for (; i < arr1.length; i++) {
+            nums[i] = arr1[i];
+        }
+        for (int i1 = 0; i1 < arr2.length; i1++) {
+            nums[i++] = arr2[i1];
+        }
+        System.err.println("====");
+
+
+    }
+
     public static void main(String[] args) {
         int[] nums = {-1, -100, 3, 99};
         int k = 2;
-        rotate(nums, k);
+        rotate2(nums, k);
     }
 }
