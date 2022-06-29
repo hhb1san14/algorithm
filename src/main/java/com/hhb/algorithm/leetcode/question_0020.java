@@ -97,21 +97,24 @@ public class question_0020 {
 
 
     public static boolean isValid3(String s) {
+        int length = s.length();
+        if (length % 2 != 0) {
+            return false;
+        }
         Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < s.length(); i++) {
-            if ('{' == s.charAt(i) || '[' == s.charAt(i) || '(' == s.charAt(i)) {
-                stack.add(s.charAt(i));
-            } else {
-                if (('}' == s.charAt(i) && stack.pop() == '{')
-                        || (']' == s.charAt(i) && stack.pop() == '[')
-                        || (')' == s.charAt(i) && stack.pop() == '(')) {
-                    continue;
-                } else {
+        for (int i = 0; i < length; i++) {
+            char c = s.charAt(i);
+            if (c == '(') {
+                stack.push(')');
+            } else if (c == '[') {
+                stack.push(']');
+            } else if (c == '{') {
+                stack.push('}');
+                } else if (!stack.isEmpty() && stack.pop() != c) {
                     return false;
                 }
             }
-        }
-        return stack.empty();
+            return stack.isEmpty();
     }
 
 
