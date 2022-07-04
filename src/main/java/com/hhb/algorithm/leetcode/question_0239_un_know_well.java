@@ -114,18 +114,25 @@ public class question_0239_un_know_well {
             return nums;
         }
         int[] result = new int[nums.length - k + 1];
-        LinkedList<Integer> queue = new LinkedList<>();
+        Deque<Integer> queue = new LinkedList<>();
+
         for (int i = 0; i < nums.length; i++) {
+            // 如果队列是非空，而且num[队列的最后面的值] < num[i],直接让最后的索引弹出
             while (!queue.isEmpty() && nums[queue.peekLast()] < nums[i]) {
                 queue.pollLast();
             }
             queue.addLast(i);
+            // 如果队列的头部，已经出了窗口，弹出
             if (queue.peek() <= i - k) {
                 queue.poll();
             }
+
+            // 索引长度达到了窗口的值
             if (i + 1 >= k) {
-                result[i + 1 - k] = nums[queue.peek()];
+                result[i - k + 1] = nums[queue.peek()];
             }
+
+
         }
         return result;
     }
@@ -156,8 +163,9 @@ public class question_0239_un_know_well {
 
 
     public static void main(String[] args) {
-        int[] arr = {1, 3, -1, -3, 5, 3, 6, 7};
-        int[] ints = maxSlidingWindow3(arr, 3);
+//        int[] arr = {1, 3, -1, -3, 5, 3, 6, 7};
+        int[] arr = {1, -1};
+        int[] ints = maxSlidingWindow3(arr, 1);
         System.err.println("====");
     }
 
