@@ -105,16 +105,29 @@ public class question_0239_un_know_well {
 
 
     /**
-     * 使用双端队列
-     *
      * @param nums
      * @param k
      * @return
      */
     public static int[] maxSlidingWindow3(int[] nums, int k) {
-
-
-        return null;
+        if (nums.length < k) {
+            return nums;
+        }
+        int[] result = new int[nums.length - k + 1];
+        LinkedList<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < nums.length; i++) {
+            while (!queue.isEmpty() && nums[queue.peekLast()] < nums[i]) {
+                queue.pollLast();
+            }
+            queue.addLast(i);
+            if (queue.peek() <= i - k) {
+                queue.poll();
+            }
+            if (i + 1 >= k) {
+                result[i + 1 - k] = nums[queue.peek()];
+            }
+        }
+        return result;
     }
 
 
@@ -144,7 +157,7 @@ public class question_0239_un_know_well {
 
     public static void main(String[] args) {
         int[] arr = {1, 3, -1, -3, 5, 3, 6, 7};
-        int[] ints = maxSlidingWindow4(arr, 3);
+        int[] ints = maxSlidingWindow3(arr, 3);
         System.err.println("====");
     }
 
