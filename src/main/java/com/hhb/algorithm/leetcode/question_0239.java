@@ -41,7 +41,7 @@ import java.util.*;
  * -10^4 <= nums[i] <= 10^4
  * 1 <= k <= nums.length
  */
-public class question_0239_un_know_well {
+public class question_0239 {
 
     /**
      * 暴力破解，但是超时
