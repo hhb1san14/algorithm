@@ -1,9 +1,6 @@
 package com.hhb.algorithm.leetcode;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @author hhb
@@ -56,9 +53,66 @@ public class question_0042 {
         return result;
     }
 
+    /**
+     * 单调栈，是一层一层计算的
+     *
+     * @param height
+     * @return
+     */
+    public static int trap2(int[] height) {
+        int result = 0;
+        int curr = 0;
+        int length = height.length;
+        Stack<Integer> stack = new Stack<>();
+        while (curr < length) {
+            while (!stack.isEmpty() && height[curr] > height[stack.peek()]) {
+                int top = stack.pop();
+                if (stack.isEmpty()) {
+                    break;
+                }
+                int w = curr - stack.peek() - 1;
+                int h = Math.min(height[curr], height[stack.peek()]) - height[top];
+                result += w * h;
+            }
+            stack.push(curr);
+            curr++;
+        }
+        return result;
+    }
+
+    /**
+     * 单调栈，五毒神掌第二边
+     *
+     * @param height
+     * @return
+     */
+    public static int trap3(int[] height) {
+        int result = 0;
+        // 用来存放索引
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < height.length; i++) {
+            //判断后面的柱子比当前的柱子高时候
+            while (!stack.isEmpty() && height[i] > height[stack.peek()]) {
+                int curr = stack.pop();
+                // 如果栈为空，直接弹出
+                if (stack.isEmpty()) {
+                    break;
+                }
+                // 那么此时计算的计算的是 curr 前后能放多少水
+                // 高度就是当前这个柱子左右的中的最小值- 当前的高度
+                int h = Math.min(height[i], height[stack.peek()]) - height[curr];
+                // 在计算两个柱子直接的长度
+                int w = i - stack.peek() - 1;
+                result += h * w;
+            }
+            stack.push(i);
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         int[] arr = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-        System.err.println(trap(arr));
+        System.err.println(trap3(arr));
     }
 
 
