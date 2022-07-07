@@ -1,6 +1,8 @@
 package com.hhb.algorithm.leetcode;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @description: 242. 有效的字母异位词 https://leetcode-cn.com/problems/valid-anagram/
@@ -40,5 +42,30 @@ public class question_0242 {
         }
         return true;
     }
+
+    public boolean isAnagram2(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+        }
+
+        for (int i = 0; i < t.length(); i++) {
+            if (!map.containsKey(t.charAt(i))) {
+                return false;
+            } else {
+                int value = map.get(t.charAt(i)) - 1;
+                if (value == 0) {
+                    map.remove(t.charAt(i));
+                } else {
+                    map.put(t.charAt(i), value);
+                }
+            }
+        }
+        return map.isEmpty();
+    }
+
 
 }
