@@ -63,4 +63,27 @@ public class question_0049 {
         return res;
     }
 
+
+    /**
+     * 标准答案
+     *
+     * @param strs
+     * @return
+     */
+    public static List<List<String>> groupAnagrams2(String[] strs) {
+        if (strs.length < 1) {
+            return new ArrayList<>();
+        }
+        Map<String, List<String>> map = new HashMap<>();
+        for (int i = 0; i < strs.length; i++) {
+            char[] chars = strs[i].toCharArray();
+            Arrays.sort(chars);
+            String key = new String(chars);
+            List<String> list = map.getOrDefault(key, new ArrayList<>());
+            list.add(strs[i]);
+            map.put(key, list);
+        }
+        return new ArrayList<>(map.values());
+    }
+
 }
