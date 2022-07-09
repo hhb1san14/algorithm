@@ -1,8 +1,6 @@
 package com.hhb.algorithm.leetcode;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @description:94. 二叉树的中序遍历 https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
@@ -26,6 +24,23 @@ public class question_0094 {
         inorderTraversal(root.left, list);
         list.add(root.val);
         inorderTraversal(root.right, list);
+    }
+
+    public static List<Integer> inorderTraversalN(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            TreeNode treeNode = stack.pop();
+            list.add(treeNode.val);
+            if (treeNode.right != null) {
+                root = treeNode.right;
+            }
+        }
+        return list;
     }
 
     public static void main(String[] args) {
@@ -55,7 +70,7 @@ public class question_0094 {
         right2.right = right4;
         right3.left = right5;
         //[3, 2, 4, 5, 1, 7, 9, 6, 10, 8]
-        List<Integer> list = inorderTraversal3(root);
+        List<Integer> list = inorderTraversalN(root);
         System.err.println(list);
     }
 
