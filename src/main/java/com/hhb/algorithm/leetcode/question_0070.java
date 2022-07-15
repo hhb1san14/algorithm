@@ -68,6 +68,22 @@ public class question_0070 {
         return climbStairs3(n - 1) + climbStairs3(n - 2);
     }
 
+
+    public static int climbStairs6(int n) {
+        if (n <= 2) {
+            return n;
+        }
+        int result = 0;
+        int left = 1;
+        int right = 2;
+        for (int i = 3; i <= n; i++) {
+            result = right + left;
+            left = right;
+            right = result;
+        }
+        return result;
+    }
+
     // N = 45  RESULT = 1836311903
     public static int climbStairs4(int n) {
         if (n <= 2) {
