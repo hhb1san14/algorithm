@@ -94,7 +94,18 @@ public class question_0104 {
         right1.right = right3;
         right2.right = right4;
         right3.left = right5;
-        System.err.println(maxDepth2(root));
+        System.err.println(maxDepth(root));
+    }
+
+    public static int maxDepth1(TreeNode root) {
+        return depth(root);
+    }
+
+    public static int depth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return Math.max(depth(root.right), depth(root.left)) + 1;
     }
 
 

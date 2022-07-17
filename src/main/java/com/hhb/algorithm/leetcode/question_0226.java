@@ -37,9 +37,9 @@ public class question_0226 {
         if (root == null) {
             return root;
         }
-        TreeNode temp = root.left;
-        root.left = root.right;
-        root.right = temp;
+        TreeNode temp = root.right;
+        root.right = root.left;
+        root.left = temp;
         invertTree(root.left);
         invertTree(root.right);
         return root;
@@ -47,23 +47,23 @@ public class question_0226 {
 
     //广度优先遍历
     public static TreeNode invertTree2(TreeNode root) {
-        if (root == null) {
-            return root;
-        }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
-            TreeNode treeNode = queue.poll();
-            TreeNode temp = treeNode.left;
-            treeNode.left = treeNode.right;
-            treeNode.right = temp;
-            if (treeNode.left != null) {
-                queue.offer(treeNode.left);
+            int size = queue.size();
+            while (size > 0) {
+                TreeNode node = queue.poll();
+                TreeNode left = node.left;
+                node.left = node.right;
+                node.right = left;
+                if (node.left != null) {
+                    queue.offer(node.left);
+                }
+                if (node.right != null) {
+                    queue.offer(node.right);
+                }
+                size--;
             }
-            if (treeNode.right != null) {
-                queue.offer(treeNode.right);
-            }
-
         }
         return root;
     }
