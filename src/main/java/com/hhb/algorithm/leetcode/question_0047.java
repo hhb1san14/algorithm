@@ -41,10 +41,9 @@ public class question_0047 {
 
     public List<List<Integer>> permuteUnique(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
-        List<Integer> temp = new ArrayList<>();
         vis = new boolean[nums.length];
         Arrays.sort(nums);
-        permuteUnique(nums, list, temp);
+        permuteUnique(nums, list, new ArrayList<>());
         return list;
     }
 
@@ -53,8 +52,11 @@ public class question_0047 {
             list.add(new ArrayList<>(temp));
             return;
         }
+
         for (int i = 0; i < nums.length; i++) {
-            if (vis[i] || (i > 0 && nums[i] == nums[i - 1] && !vis[i - 1])) {
+            // vis[i] == true 表示当前元素被访问过
+            // i > 0 时，当本次循环的元素与上一个索引位置的元素相等时，且前一个元素没有被访问过
+            if (vis[i] || (i > 0 && nums[i - 1] == nums[i] && vis[i - 1])) {
                 continue;
             }
             temp.add(nums[i]);
@@ -63,7 +65,6 @@ public class question_0047 {
             vis[i] = false;
             temp.remove(temp.size() - 1);
         }
-
 
     }
 
