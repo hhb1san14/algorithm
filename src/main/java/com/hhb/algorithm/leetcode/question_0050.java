@@ -92,7 +92,7 @@ public class question_0050 {
 
 
     /**
-     * 改造迭代
+     * 改造迭代,牛顿迭代法
      *
      * @param x
      * @param n
