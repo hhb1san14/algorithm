@@ -1,6 +1,8 @@
 package com.hhb.algorithm.leetcode;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @description: 169. 多数元素 https://leetcode-cn.com/problems/majority-element/
@@ -44,7 +46,29 @@ public class question_0169 {
             }
         }
         return result;
+    }
 
+    /**
+     * O(logN)
+     * @param nums
+     * @return
+     */
+    public int majorityElement2(int[] nums) {
+        Arrays.sort(nums);
+        return nums[nums.length / 2];
+    }
 
+    public int majorityElement3(int[] nums) {
+        Map<Integer,Integer> map = new HashMap<>();
+        int result = 0;
+        for (int i = 0; i < nums.length; i++) {
+            Integer value = map.getOrDefault(nums[i], 0) +1;
+            if(value > nums.length / 2){
+                result =  nums[i];
+                break;
+            }
+            map.put(nums[i], value );
+        }
+        return result;
     }
 }
