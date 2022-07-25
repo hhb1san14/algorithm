@@ -53,71 +53,29 @@ public class question_0017 {
 
     public static List<String> letterCombinations(String digits) {
         List<String> list = new ArrayList<>();
-        if (digits.length() < 1) {
-            return list;
+        if(digits.length() > 0){
+            letterCombinations(digits,list,new StringBuilder(),0);
         }
-        int depth = 0;
-
-        letterCombinations(list, digits, depth, new StringBuilder());
-        return list;
-
-
-    }
-
-    //                     2
-    //     a               b               c
-    //      3               3               3
-    //d    e   f       d   e   f       d   e    f
-    // ad   ae  af      bd  be  bf      cd   ce  cf
-    private static void letterCombinations(List<String> list, String digits, int depth, StringBuilder sb) {
-        //利用depth记录遍历地索引，当改大小和输入的长度一致时候，索引遍历完了一条路，将数据放到list
-        if (depth == digits.length()) {
-            list.add(sb.toString());
-        } else {
-            //获取当前数字，有哪些字母
-            String str = map.get(digits.charAt(depth));
-            for (int i = 0; i < str.length(); i++) {
-                //利用sb记录每次遍历的值
-                sb.append(str.charAt(i));
-                //回溯-递归
-                letterCombinations(list, digits, depth + 1, sb);
-                // 此时sb：ad,需要遍历到e ，所以需要将d删除
-                sb.deleteCharAt(depth);
-            }
-        }
-
-    }
-
-
-    public static List<String> letterCombinations1(String digits) {
-        List<String> list = new ArrayList<>();
-        if (digits.length() < 1) {
-            return list;
-        }
-
-        letterCombinations1(list, digits, new StringBuilder(), 0);
         return list;
     }
 
-    private static void letterCombinations1(List<String> list, String digits, StringBuilder sb, int depth) {
-        System.err.println("sb ==>" + sb + ",depth ==>>" + depth);
-        if (depth == digits.length()) {
+    private static void letterCombinations(String digits, List<String> list, StringBuilder sb,int index) {
+        if(sb.length() == digits.length()){
             list.add(sb.toString());
             return;
-        } else {
-            String str = map.get(digits.charAt(depth));
-            for (int i = 0; i < str.length(); i++) {
-                sb.append(str.charAt(i));
-                letterCombinations1(list, digits, sb, depth + 1);
-                sb.deleteCharAt(sb.length() - 1);
-            }
+        }
 
+        String str = map.get(digits.charAt(index));
+        for (int i = 0; i < str.length(); i++) {
+            sb.append(str.charAt(i));
+            letterCombinations(digits,list,sb,index + 1);
+            sb.deleteCharAt(sb.length() - 1);
         }
     }
 
 
     public static void main(String[] args) {
-        List<String> strings = letterCombinations1("23");
+        List<String> strings = letterCombinations("23");
         System.err.println(strings);
     }
 }
