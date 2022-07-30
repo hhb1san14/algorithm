@@ -36,74 +36,67 @@ public class question_0051 {
 
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> list = new ArrayList<>();
-        //记录每一行皇后的位置
-        int[] queues = new int[n];
-        Arrays.fill(queues, -1);
-        //保存某列不可以选择
+        //存放哪些列不能被选中
         Set<Integer> cols = new HashSet<>();
-        // 保存撇不可以保存数据
+        //存放那些撇不能被选中
         Set<Integer> pies = new HashSet<>();
-        // 保存捺不可以保存数据
+        //存放那些捺不能被选中
         Set<Integer> nas = new HashSet<>();
-        //递归
-        backtrack(list, queues, cols, pies, nas, n, 0);
-        //返回结果
+        //用来存放每行哪个位置可以放N皇后
+        int[] queues = new int[n];
+        //把所有的数组的元素初始化为-1，
+        Arrays.fill(queues, -1);
+        backTrack(list, cols, pies, nas, queues, n, 0);
         return list;
     }
 
-    private void backtrack(List<List<String>> list, int[] queues, Set<Integer> cols, Set<Integer> pies, Set<Integer> nas, int n, int row) {
-        if (n == row) {
-            //拼装结果
-            List<String> result = getResult(queues, n);
-            list.add(result);
+    private void backTrack(List<List<String>> list, Set<Integer> cols, Set<Integer> pies, Set<Integer> nas, int[] queues, int n, int row) {
+        if (row == n) {
+            //获取本次回溯的结果，并存放到list中
+            list.add(getResult(queues, n));
             return;
         }
         for (int i = 0; i < n; i++) {
-            //验证是否在同一行/同一个撇/同一个捺
-            if (cols.contains(i) || pies.contains(row + i) || nas.contains(row - i)) {
+            //判断该列或该撇或该捺是否存在该位置的的皇后
+            if (cols.contains(i) || pies.contains(i + row) || nas.contains(row - i)) {
                 continue;
             }
-            //同一列的数据
             //0 0 1 0
             //0 0 1 0
             //0 0 1 0
             //0 0 1 0
             cols.add(i);
-            //同一撇的数据， row + i
             //1 0 0 0
             //0 1 0 0
             //0 0 1 0
-            //1 1 1 1
+            //0 0 0 1
             pies.add(row + i);
-            //同一捺的数据
             //0 0 0 1
             //0 0 1 0
             //0 1 0 0
             //1 0 0 0
             nas.add(row - i);
-            //将结果保存，保存的结果就是几行皇后存放的位置
+            //第row层的位置要存放皇后的位置(从第0层开始，到n-1层)
             queues[row] = i;
-            //进入到下一层
-            backtrack(list, queues, cols, pies, nas, n, row + 1);
-            //将当前行本次选择的数据移除
+            //进入到下一层数据
+            backTrack(list, cols, pies, nas, queues, n, row + 1);
+            //清除当前层数据
             queues[row] = -1;
-            //将本次选择数据对应的列的数据移除
             cols.remove(i);
-            //将本次选择数据对应的撇的数据移除
             pies.remove(row + i);
-            //将本次选择数据对应的捺的数据移除
             nas.remove(row - i);
         }
     }
 
-
-    public List<String> getResult(int[] queues, int n) {
+    private List<String> getResult(int[] queues, int n) {
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < queues.length; i++) {
-            char[] row = new char[n];
-            Arrays.fill(row, '.');
-            row[queues[i]] = 'Q';
-            list.add(new String(row));
+        for (int i = 0; i < n; i++) {
+            //创建结果集，每一行都需要一个结果集，并将结果集初始化为[....]
+            char[] cArr = new char[n];
+            Arrays.fill(cArr, '.');
+            //获取每一行的要存放的索引，并在结果集该索引的位置上赋值Q
+            cArr[queues[i]] = 'Q';
+            list.add(new String(cArr));
         }
         return list;
     }
