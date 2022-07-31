@@ -36,66 +36,81 @@ public class question_0051 {
 
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> list = new ArrayList<>();
-        //存放哪些列不能被选中
+        //定义一个每层数据皇后所在的索引位置，并初始化数据
+        int[] queens = new int[n];
+        Arrays.fill(queens, -1);
+        //记录皇后所在的列\撇\捺不能存放数据
         Set<Integer> cols = new HashSet<>();
-        //存放那些撇不能被选中
-        Set<Integer> pies = new HashSet<>();
-        //存放那些捺不能被选中
         Set<Integer> nas = new HashSet<>();
-        //用来存放每行哪个位置可以放N皇后
-        int[] queues = new int[n];
-        //把所有的数组的元素初始化为-1，
-        Arrays.fill(queues, -1);
-        backTrack(list, cols, pies, nas, queues, n, 0);
+        Set<Integer> pies = new HashSet<>();
+        backStace(list, cols, nas, pies, queens, n, 0);
         return list;
     }
 
-    private void backTrack(List<List<String>> list, Set<Integer> cols, Set<Integer> pies, Set<Integer> nas, int[] queues, int n, int row) {
-        if (row == n) {
-            //获取本次回溯的结果，并存放到list中
-            list.add(getResult(queues, n));
+    /**
+     * @param list
+     * @param cols
+     * @param nas
+     * @param pies
+     * @param queens
+     * @param n
+     * @param row
+     */
+    private void backStace(List<List<String>> list, Set<Integer> cols, Set<Integer> nas, Set<Integer> pies, int[] queens, int n, int row) {
+        if (n == row) {
+            list.add(getResult(queens, n));
             return;
         }
         for (int i = 0; i < n; i++) {
-            //判断该列或该撇或该捺是否存在该位置的的皇后
-            if (cols.contains(i) || pies.contains(i + row) || nas.contains(row - i)) {
+            //判断所在列、撇、捺是否在皇后的攻击范围
+            if (cols.contains(i) || nas.contains(row + i) || pies.contains(row - i)) {
                 continue;
             }
+            //将本层的皇后放在该位置
+            queens[row] = i;
+            //将本层皇后所在列放到不能存放数据的列集合中
             //0 0 1 0
             //0 0 1 0
             //0 0 1 0
             //0 0 1 0
             cols.add(i);
+            //将本层皇后所在捺放到不能存放数据的捺集合中
             //1 0 0 0
             //0 1 0 0
             //0 0 1 0
             //0 0 0 1
-            pies.add(row + i);
+            nas.add(row + i);
+            //将本层皇后所在撇放到不能存放数据的撇集合中
             //0 0 0 1
             //0 0 1 0
             //0 1 0 0
             //1 0 0 0
-            nas.add(row - i);
-            //第row层的位置要存放皇后的位置(从第0层开始，到n-1层)
-            queues[row] = i;
-            //进入到下一层数据
-            backTrack(list, cols, pies, nas, queues, n, row + 1);
+            pies.add(row - i);
+            //进入下一层
+            backStace(list, cols, nas, pies, queens, n, row + 1);
             //清除当前层数据
-            queues[row] = -1;
+            queens[row] = -1;
             cols.remove(i);
-            pies.remove(row + i);
-            nas.remove(row - i);
+            nas.remove(row + i);
+            pies.remove(row - i);
         }
     }
 
-    private List<String> getResult(int[] queues, int n) {
+    /**
+     * 生成最终结果，组装数据
+     *
+     * @param queens 记录了本次每个皇后在每层的索引位置
+     * @param n      一共多少层
+     * @return
+     */
+    private List<String> getResult(int[] queens, int n) {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            //创建结果集，每一行都需要一个结果集，并将结果集初始化为[....]
+            //定义每层的结果m,并初始化数据
             char[] cArr = new char[n];
             Arrays.fill(cArr, '.');
-            //获取每一行的要存放的索引，并在结果集该索引的位置上赋值Q
-            cArr[queues[i]] = 'Q';
+            //获取皇后在每层的索引，并对该索引的位置的的结果集复Q
+            cArr[queens[i]] = 'Q';
             list.add(new String(cArr));
         }
         return list;
