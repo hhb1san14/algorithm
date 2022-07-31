@@ -35,29 +35,31 @@ public class question_0102 {
 
     // 广度优先遍历
     public static List<List<Integer>> levelOrder(TreeNode root) {
-        if (root == null) {
-            return null;
+        List<List<Integer>> list = new ArrayList<>();
+        if(root == null){
+            return list;
         }
-        List<List<Integer>> result = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while (!queue.isEmpty()) {
-            List<Integer> list = new ArrayList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
             int size = queue.size();
-            while (size > 0) {
+            List<Integer> temp = new ArrayList<>();
+            while (size > 0){
                 TreeNode treeNode = queue.poll();
-                list.add(treeNode.val);
-                if (treeNode.left != null) {
-                    queue.offer(treeNode.left);
+                temp.add(treeNode.val);
+                TreeNode left = treeNode.left;
+                if(left != null){
+                    queue.add(left);
                 }
-                if (treeNode.right != null) {
-                    queue.offer(treeNode.right);
+                TreeNode right = treeNode.right;
+                if(right != null){
+                    queue.add(right);
                 }
                 size--;
             }
-            result.add(list);
+            list.add(temp);
         }
-        return result;
+        return list;
     }
 
 
