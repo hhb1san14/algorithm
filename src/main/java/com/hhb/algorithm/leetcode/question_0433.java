@@ -45,41 +45,42 @@ public class question_0433 {
         for (String str : bank) {
             set.add(str);
         }
-
-        Queue<String> queue = new LinkedList<>();
-        queue.offer(start);
         Map<String, Integer> map = new HashMap<>();
-        map.put(start, 0);
+        map.put(start,0);
+        Queue<String> queue = new LinkedList<>();
+        queue.add(start);
         while (!queue.isEmpty()) {
             int size = queue.size();
             while (size > 0) {
                 String str = queue.poll();
                 for (int i = 0; i < str.length(); i++) {
+                    StringBuilder sb = new StringBuilder(str);
                     for (int j = 0; j < chars.length; j++) {
-                        StringBuilder sb = new StringBuilder(str);
                         sb.setCharAt(i, chars[j]);
                         if (!set.contains(sb.toString())) {
                             continue;
                         }
-                        if (map.containsKey(sb.toString())) {
+                        if(map.containsKey(sb.toString())){
                             continue;
                         }
-                        Integer count = map.get(str);
-                        map.put(sb.toString(), count + 1);
-                        if (sb.toString().equals(end)) {
-                            return map.get(end);
-                        }
                         queue.offer(sb.toString());
+                        Integer count = map.get(str) + 1;
+                        map.put(sb.toString(), count);
+                        if (sb.toString().equals(end)) {
+                            return count;
+                        }
                     }
                 }
                 size--;
             }
+
         }
+
         return -1;
     }
 
     public static void main(String[] args) {
         question_0433 obj = new question_0433();
-        System.err.println(obj.minMutation("AACCGGTT", "AACCGGTA", new String[]{"AACCGGTA"}));
+        System.err.println(obj.minMutation("AAAAACCC", "AACCCCCC", new String[]{"AAAACCCC","AAACCCCC","AACCCCCC"}));
     }
 }

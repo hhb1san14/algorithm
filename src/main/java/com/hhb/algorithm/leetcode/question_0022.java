@@ -1,5 +1,7 @@
 package com.hhb.algorithm.leetcode;
 
+import javafx.beans.binding.StringBinding;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,9 +87,30 @@ public class question_0022 {
     }
 
     public static void main(String[] args) {
-        System.err.println(generateParenthesisTest(3));
+//        System.err.println(generateParenthesisTest(3));
 
-        System.err.println(generateParenthesis(3));
+//        System.err.println(generateParenthesis(3));
+        System.err.println(generateParenthesis2(3));
+    }
+
+    public static List<String> generateParenthesis2(int n) {
+        List<String> list = new ArrayList<>();
+        generateParenthesis2(list, n, 0, 0, "");
+        return list;
+
+    }
+
+    private static void generateParenthesis2(List<String> list, int n, int left, int right, String str) {
+        if (n == left && n == right) {
+            list.add(str);
+            return;
+        }
+        if (left < n) {
+            generateParenthesis2(list, n, left + 1, right, str + "(");
+        }
+        if (right < left) {
+            generateParenthesis2(list, n, left, right + 1, str + ")");
+        }
     }
 
 
