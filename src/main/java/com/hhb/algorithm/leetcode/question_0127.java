@@ -39,6 +39,7 @@ public class question_0127 {
         }
         Map<String, Integer> map = new HashMap<>();
         Queue<String> queue = new LinkedList<>();
+        //存放已经访问的字符串
         List<String> list = new ArrayList<>();
         list.add(beginWord);
         queue.offer(beginWord);
@@ -56,6 +57,7 @@ public class question_0127 {
                     if (wordList.get(i).equals(str)) {
                         continue;
                     }
+                    //遍历当前单词的每一个字符位置，判断是否相等
                     int index = 0;
                     for (int j = 0; j < wordList.get(i).length(); j++) {
                         if (str.charAt(j) == wordList.get(i).charAt(j)) {
@@ -66,13 +68,18 @@ public class question_0127 {
                             break;
                         }
                     }
+                    //如果只有一个字符是错误的，其他字符是相等的，说明两个字符可以转化
                     if (index == 1) {
+                        //为了防止是A->B->A,判断是否存在已经访问过的集合中
                         if (list.contains(wordList.get(i))) {
                             continue;
                         }
+                        //如果没访问过，将该字符串加入到queue中
                         queue.offer(wordList.get(i));
+                        //步数+1
                         int count = map.getOrDefault(str, 0) + 1;
                         map.put(wordList.get(i), count);
+                        //将该字符放入访问过的集合中，方式A->B->A,死循环
                         list.add(wordList.get(i));
                     }
                 }
@@ -92,7 +99,7 @@ public class question_0127 {
 //        list.add("log");
 //        list.add("cog");
 //        System.err.println(question_0127.ladderLength("hit", "cog", list));
-                List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add("hot");
         list.add("dot");
         list.add("dog");
