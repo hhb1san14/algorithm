@@ -91,20 +91,20 @@ public class question_0127 {
 
     public static void main(String[] args) {
         question_0127 question_0127 = new question_0127();
-//        List<String> list = new ArrayList<>();
-//        list.add("hot");
-//        list.add("dot");
-//        list.add("dog");
-//        list.add("lot");
-//        list.add("log");
-//        list.add("cog");
-//        System.err.println(question_0127.ladderLength("hit", "cog", list));
         List<String> list = new ArrayList<>();
         list.add("hot");
         list.add("dot");
         list.add("dog");
         list.add("lot");
         list.add("log");
+        list.add("cog");
         System.err.println(question_0127.ladderLength("hit", "cog", list));
+//        List<String> list = new ArrayList<>();
+//        list.add("hot");
+//        list.add("dot");
+//        list.add("dog");
+//        list.add("lot");
+//        list.add("log");
+//        System.err.println(question_0127.ladderLength("hit", "cog", list));
     }
 }
